@@ -11,9 +11,20 @@ exports.it_list = async function(req, res) {
     } 
    };
 // for a specific it.
-exports.it_detail = function(req, res) {
- res.send('NOT IMPLEMENTED: it detail: ' + req.params.id);
-};
+// exports.it_detail = function(req, res) {
+//  res.send('NOT IMPLEMENTED: it detail: ' + req.params.id);
+// };
+// for a specific Costume.
+exports.it_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await IT.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+   };
 // Handle it create on POST.
 
 exports.it_create_post = async function(req, res) {
@@ -40,9 +51,30 @@ exports.it_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: it delete DELETE ' + req.params.id);
 };
 // Handle it update form on PUT.
-exports.it_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: it update PUT' + req.params.id);
-}
+// exports.it_update_put = function(req, res) {
+//  res.send('NOT IMPLEMENTED: it update PUT' + req.params.id);
+// }
+
+// Handle Costume update form on PUT.
+exports.it_update_put = async function(req, res) {
+ console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+ try {
+ let toUpdate = await IT.findById( req.params.id)
+ // Do updates of properties
+ if(req.body.company)
+ toUpdate.company = req.body.company;
+ if(req.body.experience) toUpdate.experience = req.body.experience;
+ if(req.body.salary) toUpdate.salary = req.body.salary;
+ let result = await toUpdate.save();
+ console.log("Sucess " + result)
+ res.send(result)
+ } catch (err) {
+ res.status(500)
+ res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+ }
+};
 
 exports.it_view_all_Page = async function(req, res) {
     try{
