@@ -10,11 +10,7 @@ exports.it_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     } 
    };
-// for a specific it.
-// exports.it_detail = function(req, res) {
-//  res.send('NOT IMPLEMENTED: it detail: ' + req.params.id);
-// };
-// for a specific Costume.
+
 exports.it_detail = async function(req, res) {
     console.log("detail" + req.params.id)
     try {
@@ -33,7 +29,7 @@ exports.it_create_post = async function(req, res) {
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costume_type":"goat", "cost":12, "size":"large"}
+    // {"it_type":"goat", "cost":12, "size":"large"}
     document.company = req.body.company;
     document.experience = req.body.experience;
     document.salary = req.body.salary;
@@ -47,15 +43,44 @@ exports.it_create_post = async function(req, res) {
     } 
    }
 // Handle it delete form on DELETE.
-exports.it_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: it delete DELETE ' + req.params.id);
-};
+// exports.it_delete = function(req, res) {
+//  res.send('NOT IMPLEMENTED: it delete DELETE ' + req.params.id);
+// };
 // Handle it update form on PUT.
-// exports.it_update_put = function(req, res) {
-//  res.send('NOT IMPLEMENTED: it update PUT' + req.params.id);
-// }
+//  exports.it_update_put = async function(req, res) {
+//     console.log(`update on id ${req.params.id} with body
+//     ${JSON.stringify(req.body)}`)
+//      try {
+//      let toUpdate = await IT.findById( req.params.id)
+//      // Do updates of properties
+//      if(req.body.company)
+//      toUpdate.company = req.body.company;
+//      if(req.body.experience) toUpdate.experience = req.body.experience;
+//      if(req.body.salary) toUpdate.salary = req.body.salary;
+//      let result = await toUpdate.save();
+//      console.log("Sucess " + result)
+//      res.send(result)
+//      } catch (err) {
+//      res.status(500)
+//      res.send(`{"error": ${err}: Update for id ${req.params.id}
+//     failed`);
+//      }
+//  }
 
-// Handle Costume update form on PUT.
+// Handle it delete on DELETE.
+exports.it_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await IT.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+
+// Handle it update form on PUT.
 exports.it_update_put = async function(req, res) {
  console.log(`update on id ${req.params.id} with body
 ${JSON.stringify(req.body)}`)

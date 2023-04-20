@@ -39,7 +39,7 @@ app.use('/it', itRouter);
 app.use('/board', boardRouter);
 app.use('/selector', selectorRouter);
 
-app.use('/its', IT);
+app.use('/its', itRouter);
 app.use('/resourse', resourceRouter);
 
 

@@ -1,0 +1,43 @@
+extends layout
+block content
+  h1= title
+  if(toShow == null)
+     h2 No instance to delete 
+  else
+ - let itid = toShow._id
+ - let company = toShow.company
+ - let itexperience = toShow.experience
+ - let itsalary = toShow.salary
+
+ div.row(class='mb-2')
+  div.mr-1 ID is
+  div #{itid}
+
+ form(id='ITForm', action= "/resource/its/" + toShow._id, method="PUT")
+      div.form-group
+        label.itAttr(for='company') IT company
+        input#company(type='text', name='company', value= company )
+      div.form-group
+        label.itAttr(for='experience') It experience
+        input#experience(type='text', name='experience', value= itexperience )
+      div.form-group
+        label.itAttr(for='salary') IT salary
+        input#salary(type='number', name='salary', value= itsalary )
+      input(type="submit")
+ script.
+      document.forms['ITForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+    // TODO handle body
+      }).catch((error) => {
+    // TODO handle error
+        alert("Update failed " + error )
+      });
+      });

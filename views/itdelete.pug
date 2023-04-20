@@ -1,0 +1,49 @@
+extends layout
+block content
+    h1= title
+    if (toShow == null)
+        h2 No instance to delete
+    else
+        - let itid = toShow._id
+        - let it_company = toShow.company
+        - let itexperience = toShow.experience
+        - let itsalary = toShow.salary
+        - let actionid = "/resourse/its/" + itid
+        script let actionid = "#{actionid}"
+        div
+            div.row
+                div(class='itAttr mr-3') IT ID is:
+                div #{itid}
+            div.row
+                div(class='itAttr mr-3') IT Company is:
+                div #{it_company}
+            div.row
+                div(class='itAttr mr-3') IT Experience is:
+                div #{itexperience}
+            div.row
+                div(class='itAttr mr-3') IT Salary is:
+                div #{itsalary}
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    
+    script.
+        function cancel() {   
+            window.location.href='/its'
+        }
+    script.
+         function deleteOnid() {
+            console.log("starting delete")
+
+            fetch(actionid, {
+                 method: 'DELETE' 
+            }).then((resp) => {
+                 return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Delete succeded")
+                window.location.href='/its'
+ 
+            }).catch((error) => {
+ 
+                alert("Delete failed " + error )
+            });
+        }

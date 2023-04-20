@@ -1,0 +1,31 @@
+extends layout
+block content
+ h1= title
+ form(id='ITForm', action="/resource/its", method="POST")
+  div.form-group
+   label.itAttr(for='company') IT Company
+   input#company(type='text', name='company')
+  div.form-group
+   label.itAttr(for='experience') IT experience
+   input#experience(type='text', name='experience')
+  div.form-group
+   label.itAttr(for='salary') IT salary
+   input#salary(type='number', name='salary')
+  input(type="submit")
+ script.
+  document.forms['ITForm'].addEventListener('submit', (event) => {
+   event.preventDefault();
+ // TODO do something here to show user that form is being submitted
+   fetch(event.target.action, {
+    method: 'POST',
+    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+   }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+   }).then((body) => {
+    alert("Save succeded")
+ // TODO handle body
+   }).catch((error) => {
+ // TODO handle error
+    alert("Save failed " + error )
+   });
+  });
