@@ -8,7 +8,7 @@ block content
         - let it_company = toShow.company
         - let itexperience = toShow.experience
         - let itsalary = toShow.salary
-        - let actionid = "/resourse/its/" + itid
+        - let actionid = "/resourse/it/" + itid
         script let actionid = "#{actionid}"
         div
             div.row
@@ -28,7 +28,7 @@ block content
     
     script.
         function cancel() {   
-            window.location.href='/its'
+            window.location.href='/it'
         }
     script.
          function deleteOnid() {
@@ -40,10 +40,61 @@ block content
                  return resp.json(); // or resp.text() or whatever the server sends
             }).then((body) => {
                 alert("Delete succeded")
-                window.location.href='/its'
+                window.location.href='/it'
  
             }).catch((error) => {
  
                 alert("Delete failed " + error )
             });
         }
+
+//- extends layout
+//- block content
+//-  h1= title
+//-  if (toShow == null)
+//-   h2 No instance to delete
+//-  else
+//-   - let treesid = toShow._id
+//-   - let it_company = toShow.it_company
+//-   - let itexperience = toShow.itexperience
+//-   - let itsalary = toShow.itsalary
+//-   - let actionid = "/resource/its/" + itid
+//-   script let actionid = "#{actionid}"
+//-   div
+//-    div.row
+//-     div(class='treesAttr mr-3') trees ID is:
+//-     div #{treesid}
+//-    div.row
+//-     div(class='treesAttr mr-3')  Company is:
+//-     div #{it_company}
+//-    div.row
+//-     div(class='treesAttr mr-3')  Experience is:
+//-     div #{itexperience}
+//-    div.row
+//-     div(class='treesAttr mr-3')  Salary is:
+//-     div #{itsalary}
+//-   button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+//-   button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+//-  script.
+//-   function cancel() {
+//-    // Go back to the home page for the costume collection
+//-    window.location.href='/its'
+//-   }
+//-  script.
+//-   function deleteOnid() {
+//-    console.log("starting delete")
+//-    // delete first
+//-    fetch(actionid, {
+//-     method: 'DELETE' // Don't need a body for the delete
+//-    }).then((resp) => {
+//-     return resp.json(); // or resp.text() or whatever the server sends
+//-    }).then((body) => {
+//-     alert("Delete succeded")
+//-     window.location.href='/its'
+//-     // TODO handle body
+//-    }).catch((error) => {
+//-     // TODO handle error
+//-     alert("Delete failed " + error )
+//-     });
+//-    }

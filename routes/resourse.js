@@ -8,13 +8,13 @@ var it_controller = require('../controllers/itController');
 router.get('/', api_controller.api);
 
  
-router.post('/its', it_controller.it_create_post);
+router.post('/it', it_controller.it_create_post);
 // DELETE request to delete it.
-router.delete('/its/:id', it_controller.it_delete);
+router.delete('/it/:id', it_controller.it_delete);
 // PUT request to update it.
-router.put('/its/:id', it_controller.it_update_put);
+router.put('/it/:id', it_controller.it_update_put);
 // GET request for one it.
-router.get('/its/:id', it_controller.it_detail);
+router.get('/it/:id', it_controller.it_detail);
 // GET request for list of all it items.
-router.get('/its', it_controller.it_list);
+router.get('/it', it_controller.it_list);
 module.exports = router

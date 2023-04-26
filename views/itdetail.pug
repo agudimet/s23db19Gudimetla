@@ -1,23 +1,23 @@
 extends layout
 block content
-  h1= title
-  if(toShow == null)
-     h2 No instance to delete 
-  else
- - let itid = toShow._id
- - let it_company = toShow.company
- - let itexperience = toShow.experience
- - let itsalary = toShow.salary
- div
- div.row
- div(class='itAttr mr-3') IT ID is:
- div #{itid}
- div.row
- div(class='itAttr mr-3') IT Company is:
- div #{it_company}
- div.row
- div(class='itAttr mr-3') IT Experience is:
- div #{itexperience}
- div.row
- div(class='itAttr mr-3') IT Salary is:
- div #{itsalary}
+ h1= title
+ if(toShow == null)
+  h2 No instance to delete 
+ else
+  - let itid = toShow._id
+  - let it_company = toShow.company
+  - let itexperience = toShow.experience
+  - let itsalary = toShow.salary
+  div
+   div.row
+    div(class='itAttr mr-3') IT ID is:
+    div #{itid}
+  div.row
+    div(class='itAttr mr-3') IT Company is:
+    div #{it_company}
+  div.row
+   div(class='itAttr mr-3') IT Experience is:
+   div #{itexperience}
+  div.row
+   div(class='itAttr mr-3') IT Salary is:
+   div #{itsalary}

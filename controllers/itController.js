@@ -1,3 +1,4 @@
+const validator=require('validator')
 var IT = require('../models/it');
 // List of all its
 exports.it_list = async function(req, res) {
@@ -31,7 +32,19 @@ exports.it_create_post = async function(req, res) {
     // and require that it be a json object
     // {"it_type":"goat", "cost":12, "size":"large"}
     document.company = req.body.company;
+    
+    if (!validator.isIn(req.body.experience, {minmin: 0, max: 10000000 })) {
+        res.status(400);
+        res.send(`{"error": "Insufficient experience value. experience should be more."}`);
+        return;
+    }
     document.experience = req.body.experience;
+    
+    if (!validator.isFloat(req.body.salary.toString(), { min: 0, max: 10000000 })) {
+        res.status(400);
+        res.send(`{"error": "Insufficient salary value. Salary should be between 0 and 10000000."}`);
+        return;
+    }
     document.salary = req.body.salary;
     try{
     let result = await document.save();
@@ -103,8 +116,10 @@ failed`);
 
 exports.it_view_all_Page = async function(req, res) {
     try{
+        console.log("theITs11")
     theITs = await IT.find();
-    res.render('its', { title: 'IT Search Results', results: theITs });
+    console.log(theITs)
+    res.render('it', { title: 'IT Search Results', result: theITs });
     }
     catch(err){
     res.status(500);

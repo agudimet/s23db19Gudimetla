@@ -6,7 +6,7 @@ block content
         h2 No instance to delete
     else 
         - let itid = toShow._id
-        form(id='itForm', action="/resourse/its/" + toShow._id, method="PUT")
+        form(id='itForm', action="/resourse/it/" + toShow._id, method="PUT")
             div.form-group
                 label.itAttr(for='company') IT company
                 input#company(type='text', name='company', value=toShow.company) 

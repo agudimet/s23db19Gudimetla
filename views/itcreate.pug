@@ -1,7 +1,7 @@
 extends layout
 block content
  h1= title
- form(id='ITForm', action="/resource/its", method="POST")
+ form(id='ITForm', action="/resourse/it", method="POST")
   div.form-group
    label.itAttr(for='company') IT Company
    input#company(type='text', name='company')
@@ -22,7 +22,11 @@ block content
    }).then((resp) => {
     return resp.json(); // or resp.text() or whatever the server sends
    }).then((body) => {
-    alert("Save succeded")
+    if(body.error){
+      alert(body.error)
+    }else{
+      alert("Save succeded")
+    }
  // TODO handle body
    }).catch((error) => {
  // TODO handle error

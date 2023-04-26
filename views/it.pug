@@ -1,16 +1,57 @@
+//- extends layout
+
+//- block content
+//-   h1= title
+//-   - var it= result
+//-   div(class="container-fluid")
+//-     div(class="row m-1")
+//-       each i  in it
+//-        - let destination = `dispatch(\"/it/update?id=${i._id}\")`
+//-        div(class="row-sm-2", class="m-2") IT #{i.company}, #{i.experience}, #{i.salary}
+//-         button.btn( class="btn-primary ml-1", onclick=destination) Update
+
+//-   script.
+//-     function dispatch(path){
+//-       window.location.href=path
+//-     }
+
 extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
-  - var it=[{company:"AMAZON",experience:"2",salary:40000},{company:"Capgemini",experience:"4",salary:20000},{company:"TCS",experience:"3",salary:30000}]
+  - var it= result
   div(class="container-fluid")
-  div(class="row")
-   each i,index  in it
-    div(class="col-sm-2" onclick =`buy(${index})`) #{i.company}, #{i.experience}, #{i.salary}
-    script.
-        function buy(a)
-        {
-            alert(`You joined in a ${a+1} company`)
-        }
+    div(class="row m-1")
+      a.btn.btn-primary.mb-3(href='/it/create') Create 
+      each i  in it
+        - let detailDestination = `/it/detail?id=${i._id}`
+        - let deleteDestination = `/it/delete?id=${i._id}`
+        div(class=["row-sm-2", "m-1"]) IT #{i.company}(#{i.experience}) is #{i.salary}
+          button.btn.btn-primary.ml-1(onclick=`dispatch("/it/update?id=${i._id}")`) Update
+          button.btn.btn-primary.ml-1(onclick=`dispatch("${detailDestination}")`) Detail
+          button.btn.btn-danger.ml-1(onclick=`dispatch("${deleteDestination}")`) Delete
+
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
+
+
+
+
+//- extends layout
+
+//- block content
+//-   h1= title
+//-   p Welcome to #{title}
+//-   - var it=[{company:"AMAZON",experience:"2",salary:40000},{company:"Capgemini",experience:"4",salary:20000},{company:"TCS",experience:"3",salary:30000}]
+//-   div(class="container-fluid")
+//-   div(class="row")
+//-    each i,index  in it
+//-     div(class="col-sm-2" onclick =`buy(${index})`) #{i.company}, #{i.experience}, #{i.salary}
+//-     script.
+//-         function buy(a)
+//-         {
+//-             alert(`You joined in a ${a+1} company`)
+//-         }
   
